@@ -1,0 +1,122 @@
+/* Bố cục chế độ "điện ảnh" của trang chủ.
+   Không có [data-cine] (máy bật giảm chuyển động) → các cảnh hiện dạng tĩnh xếp dọc (khai báo bằng Tailwind trong TSX).
+   [data-cine="desktop"] / [data-cine="mobile"] do GSAP gắn vào gốc trang khi bật hiệu ứng:
+   các cảnh nhiều nhịp chuyển sang dạng xếp chồng tràn màn hình để timeline điều khiển. */
+
+[data-cine] .cine-hero-stats {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: #101010;
+}
+[data-cine] .cine-hero-stat {
+  position: absolute;
+  width: 18vw;
+}
+[data-cine] .cine-hero-stat:nth-child(1) { left: 5vw; top: 24vh; }
+[data-cine] .cine-hero-stat:nth-child(2) { left: 5vw; top: 56vh; }
+[data-cine] .cine-hero-stat:nth-child(3) { right: 5vw; top: 24vh; text-align: right; }
+[data-cine] .cine-hero-stat:nth-child(4) { right: 5vw; top: 56vh; text-align: right; }
+[data-cine="mobile"] .cine-hero-stat { width: 40vw; }
+[data-cine="mobile"] .cine-hero-stat:nth-child(1) { left: 5vw; top: auto; bottom: 16vh; }
+[data-cine="mobile"] .cine-hero-stat:nth-child(2) { left: 5vw; top: auto; bottom: 5vh; }
+[data-cine="mobile"] .cine-hero-stat:nth-child(3) { right: 5vw; top: auto; bottom: 16vh; }
+[data-cine="mobile"] .cine-hero-stat:nth-child(4) { right: 5vw; top: auto; bottom: 5vh; }
+[data-cine] .cine-hero-outro {
+  position: absolute;
+  left: 50%;
+  bottom: 8vh;
+  transform: translateX(-50%);
+  display: block;
+}
+[data-cine="mobile"] .cine-hero-outro { bottom: auto; top: 15vh; width: 90vw; text-align: center; }
+
+/* ---------- Ưu điểm: 4 nhịp chồng lên nhau ---------- */
+[data-cine] .cine-adv {
+  height: 100svh;
+  max-width: none;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+[data-cine] .cine-adv-label { position: absolute; left: 5vw; top: 12vh; z-index: 3; }
+[data-cine] .cine-adv-stage { position: absolute; inset: 0; display: block; }
+[data-cine] .cine-adv-item { position: absolute; inset: 0; display: block; border: 0; padding: 0; }
+[data-cine] .cine-adv-word {
+  position: absolute;
+  left: 4vw;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  font-size: 12.5vw;
+  line-height: 0.9;
+  white-space: nowrap;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+[data-cine] .cine-adv-img { position: absolute; right: 6vw; top: 15vh; width: 40vw; height: 70vh; aspect-ratio: auto; }
+[data-cine] .cine-adv-desc { position: absolute; left: 5vw; bottom: 11vh; max-width: 26rem; margin: 0; }
+[data-cine] .cine-adv-no { position: absolute; left: 5vw; top: 20vh; }
+[data-cine="mobile"] .cine-adv-word { font-size: 17vw; top: 30%; }
+/* Điện thoại: mô tả đặt ngay dưới ảnh (tính từ trên xuống, theo svh như chiều cao cảnh) để không đè lên ảnh */
+[data-cine="mobile"] .cine-adv-img { left: 5vw; right: 5vw; width: auto; top: 40svh; height: 30svh; }
+[data-cine="mobile"] .cine-adv-desc { top: calc(70svh + 1.25rem); bottom: auto; right: 5vw; font-size: 15px; }
+[data-cine="mobile"] .cine-adv-no { top: 18vh; }
+
+/* ---------- Bản vẽ mặt bằng → zoom vào phòng ---------- */
+[data-cine="desktop"] .cine-bp { height: 100svh; display: flex; align-items: center; overflow: hidden; }
+[data-cine="desktop"] .cine-bp-plan { width: min(100%, 138vh); margin: 0 auto; }
+[data-cine="desktop"] .cine-bp-plan > section { padding-bottom: 0; padding-top: 0; }
+.cine-bp-zoom { display: none; }
+/* Rộng đúng 100vw như tấm mở đầu của đoạn ngang → ảnh hai bên trùng khít khi nối cảnh */
+[data-cine="desktop"] .cine-bp-zoom { display: block; right: auto; width: 100vw; }
+
+/* ---------- Dự án: dải ngang ---------- */
+/* Kéo cảnh dự án chồng lên màn hình cuối của cảnh bản vẽ (khung hình giống hệt) để chuyển cảnh liền mạch */
+[data-cine="desktop"] .cine-proj { margin-top: -100svh; z-index: 2; }
+[data-cine="desktop"] .cine-proj-track { display: flex; flex-direction: row; width: max-content; height: 100svh; gap: 0; padding: 0; }
+[data-cine="desktop"] .cine-proj-intro { width: 100vw; height: 100%; min-height: 0; }
+[data-cine="desktop"] .cine-proj-panel {
+  width: 82vw;
+  height: 100%;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  perspective: 1400px;
+}
+[data-cine="desktop"] .cine-proj-card { width: 42vw; height: 72vh; aspect-ratio: auto; flex-shrink: 0; }
+[data-cine="desktop"] .cine-proj-name {
+  position: absolute;
+  left: 22vw;
+  bottom: 6vh;
+  font-size: 10vw;
+  white-space: nowrap;
+  z-index: 2;
+  color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  margin: 0;
+}
+[data-cine="desktop"] .cine-proj-info { width: 26vw; margin-left: auto; align-self: flex-start; margin-top: 16vh; position: relative; z-index: 3; }
+[data-cine="desktop"] .cine-proj-end { width: 50vw; height: 100%; }
+
+/* ---------- Câu chuyện kiến trúc ---------- */
+/* (không ghim, chỉ cần vùng tràn cho các lớp chiều sâu).
+   Kéo chồng lên màn hình cuối của cú máy 3D (đã hoà sang đúng màu nền này) → không còn một màn trống trôi qua;
+   useCinematic ẩn cảnh này tới đúng lúc cú máy nhả ghim. */
+[data-cine] .cine-story { overflow: hidden; margin-top: -100svh; z-index: 2; }
+
+/* ---------- Cảm nhận: thẻ xếp chồng theo chiều sâu ---------- */
+[data-cine] .cine-voice { height: 100svh; overflow: hidden; padding: 0; position: relative; }
+[data-cine] .cine-voice-head { position: absolute; left: 5vw; top: 50%; translate: 0 -50%; width: 30vw; margin: 0; }
+[data-cine] .cine-voice-stage { position: absolute; right: 6vw; top: 0; bottom: 0; width: 52vw; display: block; perspective: 1400px; }
+[data-cine] .cine-voice-card { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; margin: 0; }
+[data-cine="mobile"] .cine-voice-head { top: 13vh; translate: none; width: 90vw; }
+[data-cine="mobile"] .cine-voice-stage { left: 5vw; right: 5vw; width: auto; top: 22vh; }
+
+/* ---------- Kết ---------- */
+[data-cine] .cine-fin { height: 100svh; overflow: hidden; padding: 0; position: relative; }
+[data-cine] .cine-fin-frame { position: absolute; inset: 0; margin: 0; width: auto; height: auto; aspect-ratio: auto; max-width: none; }
+[data-cine] .cine-fin-lines { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
+[data-cine] .cine-fin-welcome { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 3; margin: 0; }

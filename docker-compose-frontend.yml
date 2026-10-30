@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKER_IMAGE:-datviet-frontend:local}
+    container_name: dv-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    env_file:
+      - path: .env
+        required: false
+    networks:
+      - datviet-net
+
+networks:
+  datviet-net:
+    external: true

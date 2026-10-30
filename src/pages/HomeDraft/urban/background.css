@@ -1,0 +1,56 @@
+/* Nền trang giống home-draft-3: kem #f6f1e7 có quầng vàng (góc trên phải) và xanh xám (bên trái) rất nhạt,
+   cộng các dải lụa / đường lượn sóng vàng đồng chạy dọc trang (FlowBackground) có vệt sáng chạy chậm */
+.hd-page-bg {
+  isolation: isolate; /* nền lượn (-z-10) vẫn nằm trên màu nền trang */
+  --hd-flow-a: rgba(203, 167, 101, 0.14);
+  --hd-flow-b: rgba(150, 170, 205, 0.14);
+  --hd-flow-line: rgba(168, 131, 63, 0.28);
+  --hd-flow-spark: rgba(168, 131, 63, 0.9);
+  background:
+    radial-gradient(1100px 650px at 85% -10%, rgba(203, 167, 101, 0.16), transparent 60%),
+    radial-gradient(900px 600px at -10% 35%, rgba(160, 175, 205, 0.18), transparent 60%),
+    #f6f1e7;
+}
+
+/* Thẻ kính bóng như home-draft-3: trắng mờ chuyển nhẹ, viền mảnh, bóng đổ ấm mềm, mép trên ánh sáng */
+.hd-gloss {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.56));
+  border: 1px solid rgba(22, 27, 44, 0.07);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 24px 60px -30px rgba(90, 60, 20, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+}
+
+.hd-flow-line {
+  fill: none;
+  stroke: var(--hd-flow-line);
+  stroke-width: 1px;
+}
+.hd-flow-spark {
+  fill: none;
+  stroke: var(--hd-flow-spark);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  stroke-dasharray: 6 94;
+  animation: hd-flow-run 20s linear infinite;
+}
+.hd-flow-ribbon {
+  animation: hd-flow-sway 14s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes hd-flow-run {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hd-flow-sway {
+  from { transform: translateX(-1.5px); }
+  to { transform: translateX(1.5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hd-flow-spark,
+  .hd-flow-ribbon {
+    animation: none;
+  }
+}

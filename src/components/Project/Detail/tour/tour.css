@@ -1,0 +1,80 @@
+/* Lỗi và trạng thái tải đã có lớp phủ riêng của PanoramaViewer: ẩn hộp mặc định của Pannellum để không hiện chồng hai lần */
+.pnlm-container .pnlm-error-msg,
+.pnlm-container .pnlm-load-box {
+  display: none !important;
+}
+
+/* Điểm nóng trên ảnh 360° (Pannellum tự đặt vị trí theo yaw/pitch) */
+.pnlm-hotspot-base.dvg-hs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  transform-origin: center;
+  /* Pannellum đặt toạ độ theo góc trên-trái: kéo về giữa biểu tượng */
+  margin-left: -17px;
+  margin-top: -17px;
+}
+
+.dvg-hs .dvg-hs-icon {
+  display: flex;
+  height: 34px;
+  width: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid #fff;
+  color: #fff;
+  font: 700 15px/1 system-ui, sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.dvg-hs.dvg-hs-scene .dvg-hs-icon {
+  background: #b88d43;
+  animation: dvg-hs-pulse 2.2s ease-out infinite;
+}
+
+.dvg-hs.dvg-hs-info .dvg-hs-icon {
+  background: #13294b;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.dvg-hs .dvg-hs-label {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 9999px;
+  background: rgba(11, 20, 36, 0.78);
+  padding: 4px 10px;
+  color: #fff;
+  font: 600 12px/1.2 system-ui, sans-serif;
+  opacity: 0.92;
+  backdrop-filter: blur(4px);
+}
+
+.dvg-hs:hover .dvg-hs-icon,
+.dvg-hs:focus-visible .dvg-hs-icon {
+  transform: scale(1.12);
+}
+
+.dvg-hs.dvg-hs-selected .dvg-hs-icon {
+  outline: 3px solid #e6c88a;
+  outline-offset: 2px;
+}
+
+@keyframes dvg-hs-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 173, 100, 0.6), 0 2px 10px rgba(0, 0, 0, 0.35); }
+  70% { box-shadow: 0 0 0 12px rgba(212, 173, 100, 0), 0 2px 10px rgba(0, 0, 0, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 173, 100, 0), 0 2px 10px rgba(0, 0, 0, 0.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dvg-hs.dvg-hs-scene .dvg-hs-icon {
+    animation: none;
+  }
+}

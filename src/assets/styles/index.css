@@ -1,0 +1,560 @@
+@import "tailwindcss";
+
+/* Bảng màu chung theo trang chủ Hubtech: nền kem ấm, chữ đen, nhấn vàng đồng; khối tối / dải ngang màu đen.
+   Chữ Inter Tight (tiêu đề và nội dung), góc bo nhỏ cho cảm giác phẳng */
+@theme {
+  /* Góc bo nhỏ lại (phẳng như trang chủ); rounded-full giữ nguyên cho nút tròn, avatar */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
+  --radius-4xl: 10px;
+
+  /* Nhấn vàng kim sáng (sang trọng, ít ngả nâu): 600 là màu nút chính (chữ trắng đọc rõ), 300–400 dùng trên nền tối */
+  --color-primary-50: #fefaec;
+  --color-primary-100: #fcf1cc;
+  --color-primary-200: #f8e299;
+  --color-primary-300: #f2cd5f;
+  --color-primary-400: #e8b93a;
+  --color-primary-500: #d4a020;
+  --color-primary-600: #c9991f;
+  --color-primary-700: #a67d12;
+  --color-primary-800: #7c5a10;
+  --color-primary-900: #5e440d;
+  --color-red: #ef4444;
+  --color-heading: #101010;
+  --color-body: #4a4540;
+  --color-line: #e6dcd3;
+  --color-footer: #101010;
+  --color-hero-start: rgb(232 185 58 / 0.22);
+  --color-hero-end: #faf5f0;
+  /* Nền trang kem */
+  --color-page: #faf5f0;
+
+  --color-navy: #101010;
+  --color-accent: #c9991f;
+  --color-muted: #7a726b;
+  /* Màu tương phản đỏ cam: chữ nhấn trong tiêu đề, nhãn đầu mục, breadcrumb hiện tại, nhãn cần gây chú ý (tiêu điểm, mới nhất, chưa đọc, sắp hết hạn).
+     Không dùng cho nút chính — nút, icon, viền vẫn là vàng đồng */
+  --color-pop-50: #fdeee9;
+  --color-pop-400: #f07a5a; /* bản sáng hơn để đọc rõ trên nền tối */
+  --color-pop-500: #e0532f;
+  --color-pop-600: #c8431f;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #ef4444;
+
+  /* Điểm nhấn sáng trên nền tối */
+  --color-gold-200: #f8e299;
+  --color-gold-300: #f2cd5f;
+  --color-gold-400: #e8b93a;
+  --color-gold-500: #d4a020;
+  /* Chữ trên nút nền nhấn */
+  --color-gold-950: #101010;
+  /* Nền tối navy: 950 đậm nhất (chân trang, thanh điều hướng), 900 dải ngang / khối tối, 800 sáng hơn một bậc */
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #101010;
+  --color-ink-800: #1d1a17;
+  --font-sans: "Inter Tight", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Inter Tight", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Tight", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Tiêu đề lớn: Inter Tight nét vừa, khít chữ; line-height đủ cho dấu chữ hoa và đuôi chữ (g, y) */
+@utility heading-display {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+/* Nút đặc màu nhấn: vàng đồng phẳng (không bóng, không ánh màu trôi, không quầng sáng); rê chuột đậm hơn một bậc */
+@utility btn-gloss {
+  background-color: var(--color-primary-600);
+  background-image: none;
+  box-shadow: none;
+  transition-property: background-color, color, transform;
+  &:hover {
+    background-color: var(--color-primary-700);
+  }
+}
+/* Dải ngang đen có quầng vàng nhạt (Dự án, Tuyển dụng…) */
+@utility bg-ink-band {
+  background:
+    radial-gradient(800px 420px at 85% 15%, rgb(220 191 135 / 0.14), transparent 60%),
+    radial-gradient(700px 400px at 5% 90%, rgb(232 185 58 / 0.06), transparent 60%),
+    var(--color-ink-900);
+}
+/* Nền trang kem có quầng vàng / hồng kem nhạt */
+@utility bg-page-glow {
+  background:
+    radial-gradient(1100px 650px at 85% -10%, rgb(232 185 58 / 0.16), transparent 60%),
+    radial-gradient(900px 600px at -10% 35%, rgb(225 212 213 / 0.35), transparent 60%),
+    var(--color-page);
+}
+/* Chữ nhấn chuyển màu trên nền sáng: mực navy → nâu đồng → vàng đồng, đứng yên */
+@utility text-gradient-accent {
+  background: linear-gradient(100deg, #4a360a 0%, #7c5a10 45%, #c9991f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Mở rộng vùng tô lên trên / xuống dưới để dấu chữ hoa và đuôi chữ không bị cắt mất màu (bù margin nên bố cục không đổi) */
+  padding-block: 0.15em;
+  margin-block: -0.15em;
+}
+
+/* Hero background gradient */
+@utility bg-hero {
+  background-image: linear-gradient(
+    to right,
+    var(--color-hero-start) 2%,
+    var(--color-hero-end) 94%
+  );
+}
+
+/* Luôn chừa chỗ cho thanh cuộn dọc: trang dài / ngắn không làm bề ngang thay đổi (tránh bố cục nhảy khi chuyển trang) */
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  @apply bg-page text-heading antialiased;
+}
+
+/* ===== Hiệu ứng bấm thích (trang Cộng đồng) ===== */
+@keyframes like-pop {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.7); }
+  55% { transform: scale(1.4); }
+  80% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+@keyframes like-ring {
+  0% { transform: scale(0.3); opacity: 0.9; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+/* Hạt bắn ra theo góc --a (đặt bằng style) */
+@keyframes like-burst {
+  0% { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; }
+  100% { transform: rotate(var(--a)) translateY(-20px) scale(0); opacity: 0; }
+}
+@keyframes like-count {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+.like-pop { animation: like-pop 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.3); }
+.like-ring { animation: like-ring 0.55s ease-out forwards; }
+.like-burst { animation: like-burst 0.6s ease-out forwards; }
+.like-count { animation: like-count 0.4s ease-out; display: inline-block; }
+@media (prefers-reduced-motion: reduce) {
+  .like-pop, .like-ring, .like-burst, .like-count { animation: none; }
+  .like-ring, .like-burst { opacity: 0; }
+}
+
+/* ===== Home animations ===== */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+/* Thanh tiến trình chạy ngang (dùng ở thanh chọn cảm nhận khách hàng) */
+@keyframes grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}/* Header: chuông lắc, menu tài khoản trượt xuống, từng dòng hiện dần */
+@keyframes bell-ring {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(16deg); }
+  40% { transform: rotate(-14deg); }
+  60% { transform: rotate(8deg); }
+  80% { transform: rotate(-4deg); }
+}
+@keyframes menu-drop {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes menu-item {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: none; }
+}
+/* Đường dẫn sơ đồ vẽ ra từ mảnh tới ô chi tiết */
+@keyframes draw-line {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility animate-rise-in {
+  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility animate-page-in {
+  animation: page-in 0.45s ease-out backwards;
+}
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+@utility animate-drawer-in {
+  animation: drawer-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+/* Thẻ đăng nhập / đăng ký / quên mật khẩu lật sang mặt mới khi đổi trang */
+@keyframes auth-card-flip {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-80deg) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) rotateY(0) scale(1);
+  }
+}
+@utility animate-auth-card-flip {
+  animation: auth-card-flip 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: page-in 0.3s ease-out both;
+  }
+}
+@utility animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ===== Login: khu đô thị 3D ===== */
+/* Lắp ráp: rơi từ trên xuống, chạm đất nảy nhẹ (--squash: độ bẹp lúc chạm đất) */
+@keyframes piece-drop {
+  0% {
+    visibility: hidden;
+    transform: translateZ(240px) scale3d(1, 1, 1);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  1% {
+    visibility: visible;
+    transform: translateZ(237px) scale3d(1, 1, 1);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  55% {
+    transform: translateZ(0) scale3d(1, 1, var(--squash, 0.82));
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  72% {
+    transform: translateZ(14px) scale3d(1, 1, 1);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  86% {
+    transform: translateZ(0) scale3d(1, 1, 1);
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  93% {
+    transform: translateZ(3px) scale3d(1, 1, 1);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
+    visibility: visible;
+    transform: translateZ(0) scale3d(1, 1, 1);
+  }
+}
+/* Lắp ráp: mọc từ mặt đất lên (tường, trụ) */
+@keyframes piece-rise {
+  0% {
+    visibility: hidden;
+    transform: scale3d(1, 1, 0.01);
+  }
+  1% {
+    visibility: visible;
+    transform: scale3d(1, 1, 0.01);
+  }
+  100% {
+    visibility: visible;
+    transform: scale3d(1, 1, 1);
+  }
+}
+/* Lắp ráp: bật ra từ tâm (đế khu đất) */
+@keyframes piece-pop {
+  0% {
+    visibility: hidden;
+    transform: scale3d(0.01, 0.01, 0.01);
+  }
+  1% {
+    visibility: visible;
+    transform: scale3d(0.01, 0.01, 0.01);
+  }
+  100% {
+    visibility: visible;
+    transform: scale3d(1, 1, 1);
+  }
+}
+/* Lắp ráp: trải đường từ cổng vào */
+@keyframes piece-pave {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+/* Bật đèn: chớp vài lần rồi sáng hẳn  */
+@keyframes light-on {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.15;
+  }
+  55% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* Xe: hiện ra ở cổng → chạy tới sảnh tòa chính → dừng → thu nhỏ "chui" vào sảnh → lặp lại   */
+@keyframes car-drive {
+  0% {
+    transform: translateY(0) scale3d(0.01, 0.01, 0.01);
+  }
+  6%,
+  12% {
+    transform: translateY(0) scale3d(1, 1, 1);
+  }
+  80%,
+  86% {
+    transform: translateY(var(--drive)) scale3d(1, 1, 1);
+  }
+  93%,
+  100% {
+    transform: translateY(calc(var(--drive) - 6px)) scale3d(0.01, 0.01, 0.01);
+  }
+}
+
+.face-3d {
+  filter: brightness(calc(0.52 + 0.4 * cos(var(--rz) + var(--n) - 60deg)));
+}
+
+/* ===== LoadingOverlay: vòng loading khi gọi API ===== */
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+@keyframes loading-bounce {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes loading-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+@keyframes loading-fade {
+  from {
+    opacity: 0;
+  }
+}
+@utility animate-loading-spin {
+  animation: loading-spin 1s linear infinite;
+}
+@utility animate-loading-spin-reverse {
+  animation: loading-spin 3s linear infinite reverse;
+}
+@utility animate-loading-pulse {
+  animation: loading-pulse 1.6s ease-in-out infinite;
+}
+@utility animate-loading-bounce {
+  animation: loading-bounce 0.9s ease-in-out infinite;
+}
+@utility animate-loading-fade {
+  animation: loading-fade 0.2s ease-out both;
+}
+/* Vòng gradient vàng đồng → trong suốt, khoét rỗng giữa bằng mask */
+.loading-ring {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--color-primary-300) 120deg,
+    var(--color-primary-600) 300deg,
+    var(--color-primary-700) 360deg
+  );
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+}
+.loading-dot {
+  display: inline-block;
+  animation: loading-dot 1.2s ease-in-out infinite;
+}
+
+/* ===== Toast: trượt vào từ phải, viền đếm ngược ===== */
+@keyframes toast-in {
+  from {
+    transform: translateX(calc(100% + 1.25rem));
+    opacity: 0;
+  }
+}
+@keyframes toast-out {
+  to {
+    transform: translateX(calc(100% + 1.25rem));
+    opacity: 0;
+  }
+}
+@keyframes toast-countdown {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+@utility animate-toast-in {
+  animation: toast-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility animate-toast-out {
+  animation: toast-out 0.25s ease-in forwards;
+}
+/* Thời gian chạy đặt inline theo duration của từng toast; hết vòng thì Toast tự đóng (animationend) */
+.toast-countdown {
+  animation-name: toast-countdown;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-loading-spin-reverse,
+  .animate-loading-pulse,
+  .animate-loading-bounce,
+  .loading-dot {
+    animation: none !important;
+  }
+  .animate-rise-in,
+  .animate-page-in,
+  .animate-float-y,
+  .animate-marquee,
+  .city-anim {
+    animation: none !important;
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1.25);
+  }
+}
+
+/* Nội dung rich text (TipTap) dùng cho trình soạn thảo và trang đọc tin */
+.rich-content {
+  color: var(--color-heading);
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.rich-content > * + * {
+  margin-top: 1rem;
+}
+.rich-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 1.75rem;
+}
+.rich-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1.5rem;
+}
+.rich-content ul,
+.rich-content ol {
+  padding-left: 1.5rem;
+}
+.rich-content ul {
+  list-style: disc;
+}
+.rich-content ol {
+  list-style: decimal;
+}
+.rich-content blockquote {
+  border-left: 4px solid var(--color-primary-500);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--color-body);
+}
+.rich-content a {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+}
+.rich-content hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 1.5rem 0;
+}
+.rich-content img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+}
+.rich-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--color-muted);
+}
