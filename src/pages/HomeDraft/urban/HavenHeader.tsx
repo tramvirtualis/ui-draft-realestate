@@ -50,7 +50,7 @@ function AccountMenu({ header, user }: { header: HeaderController; user: AuthUse
               {roleLabel && <span className="shrink-0 border border-[#080808] px-1.5 py-0.5 text-[9px] font-medium uppercase">{roleLabel}</span>}
             </div>
             {adminPath && (
-              <Link to={adminPath} onClick={closeMenu} className="group mt-3 inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wide transition hover:text-[#146b43]">
+              <Link to={adminPath} onClick={closeMenu} className="group mt-3 inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wide transition hover:text-[#0a9150]">
                 Trang quản trị <ArrowUpRight size={12} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             )}
@@ -58,16 +58,16 @@ function AccountMenu({ header, user }: { header: HeaderController; user: AuthUse
           <ul className="py-1">
             {accountMenu.map(({ to, icon: Icon, label, count }, i) => (
               <li key={to} className="animate-[menu-item_0.35s_ease-out_both]" style={{ animationDelay: `${60 + i * 30}ms` }}>
-                <Link to={to} onClick={closeMenu} className="group relative flex items-center gap-2.5 overflow-hidden px-3 py-2 text-[13px] transition-colors hover:text-[#146b43]">
+                <Link to={to} onClick={closeMenu} className="group relative flex items-center gap-2.5 overflow-hidden px-3 py-2 text-[13px] transition-colors hover:text-[#0a9150]">
                   {/* Nền xanh nhạt quét từ trái sang + vạch xanh đậm bên trái */}
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-[#d5f5e0] transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-x-100" aria-hidden />
-                  <span className="absolute inset-y-1 left-0 w-0.5 origin-bottom scale-y-0 bg-[#146b43] transition-transform delay-100 duration-200 group-hover:scale-y-100" aria-hidden />
-                  <Icon size={14} className="relative text-[#707070] transition duration-300 group-hover:translate-x-1 group-hover:text-[#146b43]" />
+                  <span className="absolute inset-0 origin-left scale-x-0 bg-[#d6f7e1] transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-x-100" aria-hidden />
+                  <span className="absolute inset-y-1 left-0 w-0.5 origin-bottom scale-y-0 bg-[#0a9150] transition-transform delay-100 duration-200 group-hover:scale-y-100" aria-hidden />
+                  <Icon size={14} className="relative text-[#707070] transition duration-300 group-hover:translate-x-1 group-hover:text-[#0a9150]" />
                   <span className="relative transition-transform duration-300 group-hover:translate-x-1">{label}</span>
                   {count ? (
-                    <span className="relative ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#080808] px-1.5 text-[10px] font-medium text-white transition group-hover:bg-[#146b43]">{count}</span>
+                    <span className="relative ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#080808] px-1.5 text-[10px] font-medium text-white transition group-hover:bg-[#0a9150]">{count}</span>
                   ) : (
-                    <ChevronRight size={13} className="relative ml-auto -translate-x-1 text-[#707070] opacity-40 transition duration-300 group-hover:translate-x-0 group-hover:text-[#146b43] group-hover:opacity-100" />
+                    <ChevronRight size={13} className="relative ml-auto -translate-x-1 text-[#707070] opacity-40 transition duration-300 group-hover:translate-x-0 group-hover:text-[#0a9150] group-hover:opacity-100" />
                   )}
                 </Link>
               </li>
@@ -199,7 +199,7 @@ export default function HavenHeader({
                 // Trang đang mở: giữ sẵn màu nhấn + gạch chân
                 <span
                   className={`relative block py-1 leading-5 transition-colors duration-500 group-hover:text-[var(--nav-hover)] ${isActive ? "text-[var(--nav-hover)]" : ""}`}
-                  style={{ "--nav-hover": onDark && !scrolled ? "#86efac" : "#146b43" } as CSSProperties}
+                  style={{ "--nav-hover": onDark && !scrolled ? "#86efac" : "#0a9150" } as CSSProperties}
                 >
                   {item.label}
                   <span

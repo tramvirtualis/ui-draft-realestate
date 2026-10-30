@@ -183,7 +183,7 @@ export function Amenities() {
                 style={{ background: P.mint }}
                 aria-hidden
               />
-              <div className="relative transition-colors duration-500 group-hover:text-[#146b43]">
+              <div className="relative transition-colors duration-500 group-hover:text-[#0a9150]">
                 <span className="flex w-fit transition-transform duration-500 ease-[cubic-bezier(0.3,1.6,0.5,1)] group-hover:-translate-y-1.5 group-hover:-rotate-6">
                   <Icon size={28} strokeWidth={1.5} />
                 </span>

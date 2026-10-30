@@ -47,7 +47,7 @@ export default function Mascot({ size = 72, mood = "idle", wave = false, track =
         <radialGradient id={`${id}-flame`} cx="0.5" cy="0" r="1">
           <stop offset="0" stopColor="#ffffff" />
           <stop offset="0.35" stopColor="#86efac" />
-          <stop offset="1" stopColor="#146b43" stopOpacity="0" />
+          <stop offset="1" stopColor="#0a9150" stopOpacity="0" />
         </radialGradient>
         <filter id={`${id}-glow`} x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="2.2" result="b" />

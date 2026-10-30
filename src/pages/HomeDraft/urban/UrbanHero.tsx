@@ -60,7 +60,7 @@ export default function UrbanHero() {
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-[#f6f1e7]/30 pt-6">
           <Link
             to="/projects"
-            className="flex items-center gap-2 rounded-full bg-[#f6f1e7] px-6 py-3.5 text-xs font-medium uppercase tracking-wide text-[#101010] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.5)] transition hover:bg-[#dcf3e4]"
+            className="flex items-center gap-2 rounded-full bg-[#f6f1e7] px-6 py-3.5 text-xs font-medium uppercase tracking-wide text-[#101010] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.5)] transition hover:bg-[#d6f7e1]"
           >
             <Search size={14} /> Tìm dự án
           </Link>

@@ -11,9 +11,9 @@ export const P = {
   black: "#101010",
   muted: "rgba(16,16,16,0.6)",
   // Hai tông xanh phối nhau: xanh rừng đậm cho chữ / nét, xanh tươi cho khối màu, xanh nhạt cho mảng tô
-  green: "#146b43", // xanh rừng ĐẬM: chi tiết nhỏ tạo tương phản (vạch, chấm, số, nhãn, icon, chữ nhấn)
-  mint: "#dcf3e4", // xanh NHẠT: mảng tô màu (nền ô khi rê chuột)
-  neon: "#2bb673", // xanh TƯƠI: khối màu trang trí, nút
+  green: "#0a9150", // xanh rừng ĐẬM: chi tiết nhỏ tạo tương phản (vạch, chấm, số, nhãn, icon, chữ nhấn)
+  mint: "#d6f7e1", // xanh NHẠT: mảng tô màu (nền ô khi rê chuột)
+  neon: "#22c55e", // xanh TƯƠI: khối màu trang trí, nút
 };
 
 export const FONT = '"Inter Tight", "Inter", system-ui, sans-serif';
@@ -48,7 +48,7 @@ export function PaintImage({ src, alt = "", className = "", zoom = true }: { src
 }
 
 // Chữ đổi sang màu sơn khi rê chuột vào nhóm
-export const paintText = "transition-colors duration-500 group-hover:text-[#146b43]";
+export const paintText = "transition-colors duration-500 group-hover:text-[#0a9150]";
 
 /* ---------- Bố cục phẳng "xẻ chéo" (như slide mẫu): khối màu đặc phẳng sát mép, ảnh / mục cắt chéo ---------- */
 

@@ -48,7 +48,8 @@ const RIBBONS = [
   ribbon(62, 22, 14, 1.2, 2.1),
 ];
 
-export default function FlowBackground() {
+// lines=false: chỉ giữ dải lụa, bỏ 4 đường lượn mảnh và vệt sáng chạy trên đó (home-draft-4)
+export default function FlowBackground({ lines = true }: { lines?: boolean }) {
   return (
     // -z-10: nằm dưới mọi nội dung (gốc trang có isolation: isolate nên không chìm xuống dưới nền trang)
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
@@ -63,13 +64,14 @@ export default function FlowBackground() {
         {RIBBONS.map((d) => (
           <path key={d} d={d} fill="url(#hd-flow-ribbon)" className="hd-flow-ribbon" />
         ))}
-        {LINES.map((d, i) => (
-          <g key={d}>
-            <path d={d} className="hd-flow-line" vectorEffect="non-scaling-stroke" />
-            {/* Vệt sáng chạy dọc đường, mỗi đường lệch nhịp */}
-            <path d={d} className="hd-flow-spark" pathLength={100} vectorEffect="non-scaling-stroke" style={{ animationDelay: `${i * -5}s` }} />
-          </g>
-        ))}
+        {lines &&
+          LINES.map((d, i) => (
+            <g key={d}>
+              <path d={d} className="hd-flow-line" vectorEffect="non-scaling-stroke" />
+              {/* Vệt sáng chạy dọc đường, mỗi đường lệch nhịp */}
+              <path d={d} className="hd-flow-spark" pathLength={100} vectorEffect="non-scaling-stroke" style={{ animationDelay: `${i * -5}s` }} />
+            </g>
+          ))}
       </svg>
     </div>
   );

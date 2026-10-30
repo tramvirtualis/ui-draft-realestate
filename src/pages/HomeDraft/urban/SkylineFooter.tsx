@@ -22,14 +22,14 @@ const INFO: [string, string][] = [
 
 // Mảng màu loang ở nửa dưới footer
 const WASH = [
-  "radial-gradient(55% 75% at 8% 100%, rgba(43,182,115,0.45), transparent 70%)",
+  "radial-gradient(55% 75% at 8% 100%, rgba(34,197,94,0.45), transparent 70%)",
   "radial-gradient(45% 65% at 48% 105%, rgba(203,167,101,0.3), transparent 70%)",
-  "radial-gradient(50% 80% at 92% 95%, rgba(20,107,67,0.35), transparent 70%)",
+  "radial-gradient(50% 80% at 92% 95%, rgba(10,145,80,0.35), transparent 70%)",
   "radial-gradient(40% 60% at 75% 60%, rgba(220,243,228,0.7), transparent 70%)",
 ].join(", ");
 
 const isExternal = (to: string) => /^(https?:|mailto:|tel:)/.test(to);
-const linkCls = "transition-colors hover:text-[#146b43]";
+const linkCls = "transition-colors hover:text-[#0a9150]";
 
 function FooterLink({ to, children }: { to: string; children: ReactNode }) {
   return isExternal(to) ? (
@@ -139,7 +139,7 @@ export default function SkylineFooter() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex cursor-pointer items-center gap-2 transition-colors hover:text-[#146b43]"
+            className="inline-flex cursor-pointer items-center gap-2 transition-colors hover:text-[#0a9150]"
           >
             Lên đầu trang <ArrowUp size={14} />
           </button>

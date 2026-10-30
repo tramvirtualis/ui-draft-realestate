@@ -18,7 +18,7 @@ export default function ServicesGrid() {
                 {s.no}
               </span>
               <span
-                className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-300 group-hover:border-transparent group-hover:bg-[#2bb673] group-hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-300 group-hover:border-transparent group-hover:bg-[#22c55e] group-hover:text-white"
                 style={{ borderColor: "rgba(16,16,16,0.2)" }}
                 aria-hidden
               >

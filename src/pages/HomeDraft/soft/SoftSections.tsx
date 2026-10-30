@@ -10,7 +10,9 @@ import { S, SERIF, SoftHeading } from "./softUi";
 
 const WRAP = "relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28";
 
-/* ---------- Bốn ưu điểm: 4 thẻ kính, ảnh tròn, chữ serif ---------- */
+/* ---------- Bốn ưu điểm: 4 khung ảnh vòm (bo tròn phía trên như ô cửa kiến trúc), so le cao thấp tạo nhịp.
+   Viền vàng kim mảnh bao quanh vòm; dưới ảnh là số thứ tự vàng kim + vạch, tên serif, mô tả.
+   Rê chuột: ảnh phóng nhẹ, khung nhấc lên, vạch vàng dài ra, tên in nghiêng tô xanh ---------- */
 const ADVANTAGES = [
   { word: "Minh bạch", desc: "Pháp lý, giá và tiến độ của mọi dự án được công khai và kiểm chứng.", image: DAY_IN_LIFE[0].image },
   { word: "Trực quan", desc: "Tour 360°, mặt bằng tương tác và bảng hàng thời gian thực trên một màn hình.", image: DAY_IN_LIFE[1].image },
@@ -22,11 +24,28 @@ export function SoftAdvantages() {
   return (
     <section id="gioi-thieu" className={`${WRAP} scroll-mt-24`}>
       <SoftHeading eyebrow="Giới thiệu" title="Bốn điều làm nên" accent="Hubtech" />
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {ADVANTAGES.map((a) => (
-          <article key={a.word} className="hd-gloss group p-6 transition duration-300 hover:-translate-y-1">
-            <img src={a.image} alt="" loading="lazy" className="h-16 w-16 rounded-full object-cover ring-4 ring-white" />
-            <h3 className="mt-6 text-2xl font-medium transition-colors group-hover:text-[#146b43]" style={{ fontFamily: SERIF }}>
+      <div className="mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        {ADVANTAGES.map((a, i) => (
+          <article key={a.word} className={`group ${i % 2 === 1 ? "lg:mt-16" : ""}`}>
+            {/* Khung vòm: lớp ngoài viền vàng kim, cách ảnh một khoảng nhỏ */}
+            <div className="rounded-t-full border p-2 transition duration-500 group-hover:-translate-y-2" style={{ borderColor: "rgba(201,161,74,0.55)" }}>
+              <div className="relative aspect-[3/4] overflow-hidden rounded-t-full shadow-[0_30px_50px_-30px_rgba(15,22,38,0.55)]">
+                <img
+                  src={a.image}
+                  alt=""
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-[1200ms] group-hover:scale-110"
+                />
+                <span className="absolute inset-0 bg-gradient-to-t from-[#0f1626]/30 via-transparent to-transparent" aria-hidden />
+              </div>
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="text-sm font-semibold tabular-nums tracking-[0.2em]" style={{ color: S.gold }}>
+                0{i + 1}
+              </span>
+              <span className="h-px w-8 transition-all duration-500 group-hover:w-16" style={{ background: S.bronze }} aria-hidden />
+            </div>
+            <h3 className="mt-3 text-3xl font-medium transition-colors duration-300 group-hover:italic group-hover:text-[#0a9150]" style={{ fontFamily: SERIF }}>
               {a.word}
             </h3>
             <p className="mt-3 text-sm leading-7" style={{ color: S.muted }}>
@@ -87,7 +106,7 @@ export function SoftServices() {
               <span className="text-4xl italic" style={{ fontFamily: SERIF, color: S.accent }}>
                 {s.no}
               </span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm transition-colors duration-300 group-hover:bg-[#2bb673] group-hover:text-white" aria-hidden>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm transition-colors duration-300 group-hover:bg-[#22c55e] group-hover:text-white" aria-hidden>
                 <ArrowUpRight size={16} />
               </span>
             </div>
@@ -110,7 +129,7 @@ export function SoftProjects() {
     <section id="du-an" className={`${WRAP} scroll-mt-24`}>
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SoftHeading eyebrow="Dự án" title="Dự án" accent="tiêu biểu" />
-        <Link to="/projects" className="hd-gloss flex items-center gap-2 !rounded-full px-5 py-3 text-sm font-semibold transition hover:text-[#146b43]">
+        <Link to="/projects" className="hd-gloss flex items-center gap-2 !rounded-full px-5 py-3 text-sm font-semibold transition hover:text-[#0a9150]">
           Tất cả dự án <ArrowUpRight size={15} />
         </Link>
       </div>
@@ -126,7 +145,7 @@ export function SoftProjects() {
             <p className="mt-5 text-xs uppercase tracking-wider" style={{ color: S.muted }}>
               {p.category}
             </p>
-            <h3 className="mt-2 flex items-center justify-between text-3xl font-medium transition-colors group-hover:text-[#146b43]" style={{ fontFamily: SERIF }}>
+            <h3 className="mt-2 flex items-center justify-between text-3xl font-medium transition-colors group-hover:text-[#0a9150]" style={{ fontFamily: SERIF }}>
               {p.name} <ArrowUpRight size={20} strokeWidth={1.5} />
             </h3>
             <p className="mt-2 text-sm leading-7" style={{ color: S.muted }}>
@@ -151,7 +170,7 @@ export function SoftStats() {
           <div key={s.label} className="text-center">
             <dd className="text-4xl font-medium" style={{ fontFamily: SERIF }}>
               {s.value.toLocaleString("vi-VN")}
-              <span style={{ color: S.accent }}>{s.suffix}</span>
+              {s.suffix}
             </dd>
             <dt className="mt-1 text-xs uppercase tracking-wider" style={{ color: S.muted }}>
               {s.label}
@@ -287,7 +306,7 @@ export function SoftAmenities() {
           const Icon = AMENITY_ICONS[a.icon];
           return (
             <li key={a.title} className="hd-gloss group p-6 transition duration-300 hover:-translate-y-1">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl transition-colors duration-300 group-hover:bg-[#2bb673] group-hover:text-white" style={{ background: S.tint, color: S.accent }}>
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl transition-colors duration-300 group-hover:bg-[#22c55e] group-hover:text-white" style={{ background: S.tint, color: S.accent }}>
                 <Icon size={22} strokeWidth={1.6} />
               </span>
               <p className="mt-6 text-lg font-medium" style={{ fontFamily: SERIF }}>

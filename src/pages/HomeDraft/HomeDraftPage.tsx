@@ -16,7 +16,7 @@ import UrbanHero from "./urban/UrbanHero";
 import { Amenities, DayInLife, ManifestoBand, StorySplit } from "./urban/urbanSections";
 
 /* Trang chủ nháp (/home-draft-3): bố cục trang chủ "Spaces Urbanistic" (Hubtech) trước khi đổi sang kể chuyện theo cuộn.
-   Nền giống home-draft-3 (kem #f6f1e7 có quầng vàng / xanh xám nhạt + lượn sóng dọc trang, thẻ #efe6d6 / #e6dccb), chữ đen #101010, nhấn xanh lá tươi (#146b43, nhạt #d5f5e0),
+   Nền giống home-draft-3 (kem #f6f1e7 có quầng vàng / xanh xám nhạt + lượn sóng dọc trang, thẻ #efe6d6 / #e6dccb), chữ đen #101010, nhấn xanh lá tươi (#0a9150, nhạt #d6f7e1),
    font grotesk Inter Tight, tiêu đề IN HOA lớn, lộ trình chữ khổng lồ, đường kẻ đen mảnh. Bảng màu ở urban/urbanUi.tsx. */
 
 const ADVANTAGES = [
@@ -155,7 +155,7 @@ function ScrollJourney() {
           <div key={step.word} className="animate-rise-in mt-10 grid gap-8 md:grid-cols-[1fr_2fr]">
             <div>
               <span className="flex h-20 w-20 items-center justify-center" style={{ background: P.green }}>
-                <Icon size={34} strokeWidth={1.5} className="text-[#d5f5e0]" />
+                <Icon size={34} strokeWidth={1.5} className="text-[#d6f7e1]" />
               </span>
               <h3 className="mt-5 max-w-[14ch] text-xl font-semibold uppercase leading-tight tracking-tight md:text-2xl">{step.title}</h3>
             </div>
@@ -314,7 +314,7 @@ export default function UrbanDraftPage() {
                   aria-current={i === quote}
                   className="group relative z-10 cursor-pointer py-3"
                 >
-                  <span className="relative block h-1 w-10 overflow-hidden transition-colors group-hover:bg-[#146b43]/40" style={{ background: "rgba(16,16,16,0.2)" }}>
+                  <span className="relative block h-1 w-10 overflow-hidden transition-colors group-hover:bg-[#0a9150]/40" style={{ background: "rgba(16,16,16,0.2)" }}>
                     {/* Vạch đang xem chạy đầy theo thời gian tự chuyển (dừng thì đầy sẵn) */}
                     {i === quote && (
                       <span
@@ -339,7 +339,7 @@ export default function UrbanDraftPage() {
                   type="button"
                   onClick={() => setQuote((q) => (q + step + TESTIMONIALS.length) % TESTIMONIALS.length)}
                   aria-label={label}
-                  className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border transition-colors hover:border-[#146b43] hover:bg-[#146b43] hover:text-[#f6f1e7]"
+                  className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border transition-colors hover:border-[#0a9150] hover:bg-[#0a9150] hover:text-[#f6f1e7]"
                   style={{ borderColor: P.black }}
                 >
                   <Icon size={16} className={cls} />
